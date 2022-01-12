@@ -5,7 +5,19 @@ from importlib.resources import contents, open_text
 import numpy as np
 
 RE_SYMBOLS = r"[-=+*/%><):\s\t]+"
-KEYWORDS = [":", "if", "else", "elif", "if:", "else:", "elif:", "True", "False", "True:", "False:"]
+KEYWORDS = [
+    ":",
+    "if",
+    "else",
+    "elif",
+    "if:",
+    "else:",
+    "elif:",
+    "True",
+    "False",
+    "True:",
+    "False:",
+]
 PARENTHESES = ["("]
 DIGITS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMONPQRSTUVWXYZ"
@@ -24,7 +36,7 @@ class VariablesExternalData:
     # TODO : add units in .txt file (my:var || var:name || unit).
     # TODO : replace _variable_names by _variable_data, which will contain both name and unit.
     _variable_names = {}
-    
+
     @classmethod
     def read_variable_names(cls, file_parent: str):
         """
@@ -79,11 +91,18 @@ class VariablesExternalData:
 
 
 class Variable:
-    def __init__(self, symbol='Default', name='Default_name', unit='None', val='np.nan', output=False):
+    def __init__(
+        self,
+        symbol="Default",
+        name="Default_name",
+        unit="None",
+        val="np.nan",
+        output=False,
+    ):
         self.symbol = symbol
         self.name = name
-        if symbol != 'Default' and name == 'Default_name':
-            self.name = symbol # + '_name'
+        if symbol != "Default" and name == "Default_name":
+            self.name = symbol  # + '_name'
         self.unit = unit
         self.val = val
         self.param = []
@@ -96,20 +115,29 @@ class Variable:
         param = "\n"
         for p in self.param:
             param += str(p) + "\n"
-        return "symbol: " + self.symbol + " name: " + self.name + " param:( " + param + ")\nequation: " + self.equation
-    
+        return (
+            "symbol: "
+            + self.symbol
+            + " name: "
+            + self.name
+            + " param:( "
+            + param
+            + ")\nequation: "
+            + self.equation
+        )
+
     def add_param(self, param):
         self.param.append(param)
 
     def delete(self):
         self.deleted = True
-        
+
     def update_variable_name(self, new_name):
         self.name = new_name
 
     def update_variable_unit(self, new_unit):
         self.unit = unit = new_unit
-        
+
 
 class Constant:
     def __init__(self, symbol):
@@ -273,14 +301,19 @@ def add_var_out(x, var_in, var_out, pack):
     :return: adds the variable to var_out if the conditions are verified and returns True if the variable has been added
     also returns the variable added if a variable was added
     """
-    if is_not_in(x, KEYWORDS) and not_var(x, var_in) and not_var(x, var_out) and check_pack(x, pack):
-        var = Variable(symbol=x, val='', output=True)
+    if (
+        is_not_in(x, KEYWORDS)
+        and not_var(x, var_in)
+        and not_var(x, var_out)
+        and check_pack(x, pack)
+    ):
+        var = Variable(symbol=x, val="", output=True)
         # change name according to variable_names.txt file
         if x in VariablesExternalData._variable_names:
-                    var.update_variable_name(VariablesExternalData._variable_names[x])
+            var.update_variable_name(VariablesExternalData._variable_names[x])
         var_out.append(var)
         return [True, var]
-    return [False, 'None']
+    return [False, "None"]
 
 
 def handle_function(x, var_in, var_out, const, pack):
@@ -292,9 +325,9 @@ def handle_function(x, var_in, var_out, const, pack):
     :param const: constants already found
     :return: adds the newly found variables to var_in
     """
-    if x[0] == '(':
+    if x[0] == "(":
         x = x[1:]
-        if len(x) > 1 and x[-1] == 'e':
+        if len(x) > 1 and x[-1] == "e":
             handle_exponent(x, var_in, var_out, const, pack)
         add_var_in(x, var_in, var_out, const, pack, True)
 
@@ -303,14 +336,14 @@ def handle_function(x, var_in, var_out, const, pack):
         p = re.split(RE_SYMBOLS, x)
         for y in p:
             if contains(y, letters):
-                if len(x) > 1 and x[-1] == 'e':
+                if len(x) > 1 and x[-1] == "e":
                     handle_exponent(x, var_in, var_out, const, pack)
                 else:
                     add_var_in(x, var_in, var_out, const, pack, True)
     else:
-        f = re.split(r'[(]', x, 1)
-        if contains('', f):
-            f.remove('')
+        f = re.split(r"[(]", x, 1)
+        if contains("", f):
+            f.remove("")
         if len(f) == 2:
             handle_function(f[1], var_in, var_out, const, pack)
 
@@ -343,43 +376,45 @@ def get_variables(equation, pack):
     # data_in = [['var_name', 'unit', 0.0]]
     units_out = []
     lines = equation.splitlines()
-    VariablesExternalData.read_variable_names(NAMES_FILENAME_PATH)  # read variables names provided in variables_names.txt
+    VariablesExternalData.read_variable_names(
+        NAMES_FILENAME_PATH
+    )  # read variables names provided in variables_names.txt
     for i in range(len(lines)):
-        spt = lines[i].split('# [')
+        spt = lines[i].split("# [")
         if len(spt) >= 2:
             unit = spt[-1]
             if len(unit) > 1:
                 f_unit = unit.split("]")[0]
                 units_out.append([i, f_unit])
             else:
-                units_out.append([i, ''])
+                units_out.append([i, ""])
             lines[i] = spt[0]
     for i in range(len(lines)):
-        spt = lines[i].split('#[')
+        spt = lines[i].split("#[")
         if len(spt) >= 2:
             unit = spt[-1]
             if len(unit) > 1:
                 f_unit = unit.split("]")[0]
                 units_out.append([i, f_unit])
             else:
-                units_out.append([i, 'None'])
+                units_out.append([i, "None"])
             lines[i] = spt[0]
     added = False
     for i in range(len(lines)):
         first = True
-        if '=' not in lines[i]:
+        if "=" not in lines[i]:
             first = False
         else:
             added = False
-        if '#' in lines[i]:
-            lines[i] = lines[i].split('#', 1)[0]
+        if "#" in lines[i]:
+            lines[i] = lines[i].split("#", 1)[0]
         if '"""' in lines[i]:
             lines[i] = lines[i].split('"""', 1)[0]
         if "'''" in lines[i]:
             lines[i] = lines[i].split("'''", 1)[0]
         groups = re.split(RE_SYMBOLS, lines[i])
-        if '' in groups:
-            groups.remove('')
+        if "" in groups:
+            groups.remove("")
         if len(groups) > 0 and not is_not_in(groups[0], KEYWORDS):
             first = False
             added = False
@@ -392,14 +427,14 @@ def get_variables(equation, pack):
                     if first:
                         [added, var] = add_var_out(x, var_in, var_out, pack)
                         if added:
-                            u_out = 'None'
+                            u_out = "None"
                             for u in units_out:
                                 if u[0] == i:
                                     u_out = u[1]
                             var.unit = u_out
                             var.equation = lines[i].split("=")[1]
                     else:
-                        if len(x) > 1 and x[-1] == 'e':
+                        if len(x) > 1 and x[-1] == "e":
                             handle_exponent(x, var_in, var_out, const, pack)
                         else:
                             add_var_in(x, var_in, var_out, const, pack, True)
@@ -427,9 +462,9 @@ def format_line(line):
     :param line: line to be modified
     :return: removes spaces before and after the name
     """
-    while len(line) > 1 and line[0] == ' ':
+    while len(line) > 1 and line[0] == " ":
         line = line[1:]
-    while len(line) > 1 and line[-1] == ' ':
+    while len(line) > 1 and line[-1] == " ":
         line = line[:-1]
     return line
 
@@ -459,11 +494,7 @@ def edit_function(inputs, outputs, function):
     return prefix + function_ + suffix
 
 
-TEXT = "y = x + 1\n" \
-       "if y == 0:\n" \
-       "    y = 1\n" \
-       "z = y**2 - x\n" \
-       "# Comment here\n"
+TEXT = "y = x + 1\n" "if y == 0:\n" "    y = 1\n" "z = y**2 - x\n" "# Comment here\n"
 
 
 def main():
@@ -472,5 +503,5 @@ def main():
     print(var_out[0])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

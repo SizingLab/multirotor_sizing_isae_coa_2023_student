@@ -11,6 +11,7 @@ class CompData:
     """
     A class to store data about components
     """
+
     def __init__(self):
         self.group = "None"
         self.name = "DefaultName"
@@ -24,6 +25,7 @@ class HGdata:
     """
     A class to store data about higher groups recursively
     """
+
     def __init__(self):
         self.name = "Default_name"
         self.children = []
@@ -63,7 +65,11 @@ def total_parse(str, pack):
                 comp_data = CompData()
                 comp_data.group = g[0]
                 comp_data.name = c[0]
-                comp_data.var_in, comp_data.var_out, comp_data.constants = get_variables(c[1], pack)
+                (
+                    comp_data.var_in,
+                    comp_data.var_out,
+                    comp_data.constants,
+                ) = get_variables(c[1], pack)
                 comp_data.equation = c[1]
                 list_of_components.append(comp_data)
 
@@ -75,7 +81,9 @@ def total_parse(str, pack):
         for c in comp:
             comp_data = CompData()
             comp_data.name = c[0]
-            comp_data.var_in, comp_data.var_out, comp_data.constants = get_variables(c[1], pack)
+            comp_data.var_in, comp_data.var_out, comp_data.constants = get_variables(
+                c[1], pack
+            )
             comp_data.equation = c[1]
             list_of_components.append(comp_data)
 
@@ -85,7 +93,7 @@ def total_parse(str, pack):
 
 
 def is_higher_group(str):
-    if '#%%% ' in str:
+    if "#%%% " in str:
         return True
     return False
 
@@ -150,7 +158,9 @@ def gen_string(result, pack, d_check, imports=False, black=True):
             comp_f = edit_function(var_in, var_out, comp_f)
             c_name = comp[i].name
             if d_check:
-                s += component_str_derivative(c_name, var_in, var_out, const, comp_f, pack, black=black)
+                s += component_str_derivative(
+                    c_name, var_in, var_out, const, comp_f, pack, black=black
+                )
             else:
                 s += component_str(c_name, var_in, var_out, comp_f, black=black)
     else:
@@ -165,9 +175,19 @@ def gen_string(result, pack, d_check, imports=False, black=True):
                 const = comp_data.constants
                 comp_f = edit_function(inputs, outputs, comp_data.equation)
                 if d_check:
-                    s += component_str_derivative(comp_data.name, inputs, outputs, const, comp_f, pack, black=black)
+                    s += component_str_derivative(
+                        comp_data.name,
+                        inputs,
+                        outputs,
+                        const,
+                        comp_f,
+                        pack,
+                        black=black,
+                    )
                 else:
-                    s += component_str(comp_data.name, inputs, outputs, comp_f, black=black)
+                    s += component_str(
+                        comp_data.name, inputs, outputs, comp_f, black=black
+                    )
             s += "\n"
             ls.append(s)
     return [s, ls]
@@ -183,11 +203,17 @@ def rec_gen_string(hg_data, pack, d_check, black=True):
     """
     s = ""
     if hg_data.last:
-        names = [[hg_data.children[i][0], hg_data.children[i][0]] for i in range(len(hg_data.children))]
+        names = [
+            [hg_data.children[i][0], hg_data.children[i][0]]
+            for i in range(len(hg_data.children))
+        ]
         s += group_str(hg_data.name, names, 0, pack) + "\n"
         s += gen_string(hg_data.children, pack, d_check, black=black)[0]
     else:
-        names = [[hg_data.children[i].name, hg_data.children[i].name] for i in range(len(hg_data.children))]
+        names = [
+            [hg_data.children[i].name, hg_data.children[i].name]
+            for i in range(len(hg_data.children))
+        ]
         s += group_str(hg_data.name, names, 0, pack) + "\n"
         for child in hg_data.children:
             s += rec_gen_string(child, pack, d_check, black=black)
@@ -220,50 +246,54 @@ def multi_rec_gen_string(hg_data, pack, d_check):
     return s, ls
 
 
-TEXT = "\n" \
-       "#%% Group1\n" \
-       "#% Component1\n" \
-       "\n" \
-       "\n" \
-       "x = y*3 +2\n" \
-       "z = w**2 +a*4\n" \
-       "\n" \
-       "#% Component2\n" \
-       "a = b_/(c_ + c**2)\n" \
-       "d = e + f\n" \
-       "#%% Group2\n" \
-       "\n" \
-       "\n" \
-       "#% Component3\n" \
-       "\n" \
-       "\n" \
-       "x = y*3 +5\n" \
-       "z = w**2 +a*3\n" \
-       "\n" \
-       "#% Component4\n" \
-       "a = b + c*6\n" \
-       "d = e + f*3\n" \
-       "\n"
+TEXT = (
+    "\n"
+    "#%% Group1\n"
+    "#% Component1\n"
+    "\n"
+    "\n"
+    "x = y*3 +2\n"
+    "z = w**2 +a*4\n"
+    "\n"
+    "#% Component2\n"
+    "a = b_/(c_ + c**2)\n"
+    "d = e + f\n"
+    "#%% Group2\n"
+    "\n"
+    "\n"
+    "#% Component3\n"
+    "\n"
+    "\n"
+    "x = y*3 +5\n"
+    "z = w**2 +a*3\n"
+    "\n"
+    "#% Component4\n"
+    "a = b + c*6\n"
+    "d = e + f*3\n"
+    "\n"
+)
 
-TEXT2 = "\n" \
-        "#%%%% HHG1\n" \
-        "\n" \
-        "#%%% HG1\n" \
-        "#%% G1\n" \
-        "#% C1\n" \
-        "y = x+1 #Comment behind equation\n" \
-        "# COMMENT HERE\n" \
-        "''' SECOND COMMENT '''\n" \
-        "z = y**2 + x\n" \
-        "#%%% HG2\n" \
-        "#%% G2\n" \
-        "#% C2\n" \
-        "y = z+1\n" \
-        "#%%%% HHG2\n" \
-        "#%%% HG3\n" \
-        "#%% G3\n" \
-        "#% C1\n" \
-        "y = x+1\n"
+TEXT2 = (
+    "\n"
+    "#%%%% HHG1\n"
+    "\n"
+    "#%%% HG1\n"
+    "#%% G1\n"
+    "#% C1\n"
+    "y = x+1 #Comment behind equation\n"
+    "# COMMENT HERE\n"
+    "''' SECOND COMMENT '''\n"
+    "z = y**2 + x\n"
+    "#%%% HG2\n"
+    "#%% G2\n"
+    "#% C2\n"
+    "y = z+1\n"
+    "#%%%% HHG2\n"
+    "#%%% HG3\n"
+    "#%% G3\n"
+    "#% C1\n"
+    "y = x+1\n"
+)
 
 
 def main():
@@ -272,5 +302,5 @@ def main():
     print(s)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,15 +1,19 @@
 from . import variable_recognition as vr
 from . import parse_pack as pp
 
-TEXT = "x = y3**2.5+4e-10 + np.exp + mat.exp + math.exp + numpy.exp #[m]\n" \
-       "b = Dext/(Dalpha*1.0e-1 + 1) #[kg]\n" \
-       "force = np.log(np.cos(lift + 1.3e+4)+sin(np.log(np.exp(x)) + 1\n" \
-       "if area == 3e+3:\n" \
-       "    elif j_2 < 3:\n" \
-       "        j_2 += 1.1e+2 + 2\n"
+TEXT = (
+    "x = y3**2.5+4e-10 + np.exp + mat.exp + math.exp + numpy.exp #[m]\n"
+    "b = Dext/(Dalpha*1.0e-1 + 1) #[kg]\n"
+    "force = np.log(np.cos(lift + 1.3e+4)+sin(np.log(np.exp(x)) + 1\n"
+    "if area == 3e+3:\n"
+    "    elif j_2 < 3:\n"
+    "        j_2 += 1.1e+2 + 2\n"
+)
 
-TEST = "ratio_x025 = x0_25 / fus_length\n" \
-       "k_h = 0.01222 - 7.40541e-4 * ratio_x025 * 100 + 2.1956e-5 * (ratio_x025 * 100) ** 2"
+TEST = (
+    "ratio_x025 = x0_25 / fus_length\n"
+    "k_h = 0.01222 - 7.40541e-4 * ratio_x025 * 100 + 2.1956e-5 * (ratio_x025 * 100) ** 2"
+)
 PACK = "numpy as np, math as mat"
 
 
@@ -37,5 +41,5 @@ def main():
     print(vr.edit_function(inputs, outputs, text))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

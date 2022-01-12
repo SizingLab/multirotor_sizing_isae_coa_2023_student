@@ -52,10 +52,16 @@ def generate_file(result, pack, d_check):
                 f.write(pp.string_pack(pack))
             f.write("\n\n")
             f.write("@oad.RegisterOpenMDAOSystem('drone')\n")  # register fast-oad model
-            add_group(f, result[i][0], [[comp.name, comp.name]for comp in result[i][1]], 0)
+            add_group(
+                f, result[i][0], [[comp.name, comp.name] for comp in result[i][1]], 0
+            )
             for comp_data in result[i][1]:
                 comp_f = comp_data.equation
-                var_in, var_out, const = comp_data.var_in, comp_data.var_out, comp_data.constants
+                var_in, var_out, const = (
+                    comp_data.var_in,
+                    comp_data.var_out,
+                    comp_data.constants,
+                )
                 comp_f = edit_function(var_in, var_out, comp_f)
                 c_name = comp_data.name
                 add_component(f, c_name, var_in, var_out, const, comp_f, pack, d_check)
@@ -99,7 +105,10 @@ def add_component(f, c_name, inputs, outputs, const, comp_f, pack, d_check):
     :return: writes in the target file the code for the selected component
     """
     if d_check:
-        f.write(component_str_derivative(c_name, inputs, outputs, const, comp_f, pack) + "\n")
+        f.write(
+            component_str_derivative(c_name, inputs, outputs, const, comp_f, pack)
+            + "\n"
+        )
     else:
         f.write(component_str(c_name, inputs, outputs, comp_f) + "\n")
 
@@ -120,5 +129,9 @@ def add_group(f, g_name, subsystems, init):
         f.write("\n\n")
     f.write("\tdef setup(self):\n")
     for i in range(len(subsystems)):
-        f.write('\t\tself.add_subsystem("{}", {}(), promotes=["*"])\n'.format(subsystems[i][0], subsystems[i][1]))
+        f.write(
+            '\t\tself.add_subsystem("{}", {}(), promotes=["*"])\n'.format(
+                subsystems[i][0], subsystems[i][1]
+            )
+        )
     f.write("\n\n")

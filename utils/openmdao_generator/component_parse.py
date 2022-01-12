@@ -7,7 +7,7 @@ def is_empty(str):
     :return: a boolean, True if the string is empty meaning contains only spaces, tabs and line breaks
     """
     for l in str:
-        if l != '\s' and l != '\n' and l != '\t':
+        if l != "\s" and l != "\n" and l != "\t":
             return False
     return True
 
@@ -17,9 +17,9 @@ def format_comp(comp):
     :param comp: component name
     :return: removes spaces before and after the name
     """
-    while len(comp) > 1 and comp[0] == ' ':
+    while len(comp) > 1 and comp[0] == " ":
         comp = comp[1:]
-    while len(comp) > 1 and comp[-1] == ' ':
+    while len(comp) > 1 and comp[-1] == " ":
         comp = comp[:-1]
     return comp
 
@@ -50,7 +50,7 @@ def parse_comp(str):
             p_str.remove(x)
 
     for c in p_str:
-        comp = c.split('\n', 1)
+        comp = c.split("\n", 1)
         comp[0] = format_comp(comp[0])
         comp[1] = format_str(comp[1])
         components.append([comp[0], comp[1]])
@@ -58,22 +58,24 @@ def parse_comp(str):
     return components
 
 
-TEXT = "\n" \
-       "#% Component1\n" \
-       "\n" \
-       "# comment here\n" \
-       "x = y*3 +2\n" \
-       "z = w**2 +a*4\n" \
-       "\n" \
-       "#% Component2\n" \
-       "a = b + c*2\n" \
-       "d = e + f\n" \
-       "\n"
+TEXT = (
+    "\n"
+    "#% Component1\n"
+    "\n"
+    "# comment here\n"
+    "x = y*3 +2\n"
+    "z = w**2 +a*4\n"
+    "\n"
+    "#% Component2\n"
+    "a = b + c*2\n"
+    "d = e + f\n"
+    "\n"
+)
 
 
 def main():
     print(parse_comp(TEXT))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -6,11 +6,13 @@ for i in range(len(LS)):
     else:
         name = HG_DATA.children[i][0]
     f_name = file_check(name)
-    suf = '\n\np = om.Problem()'\
-        '\nmodel = p.model'\
-        '\nmodel.add_subsystem("{}", {}(), promotes=["*"])'\
-        '\np.setup()' \
+    suf = (
+        "\n\np = om.Problem()"
+        "\nmodel = p.model"
+        '\nmodel.add_subsystem("{}", {}(), promotes=["*"])'
+        "\np.setup()"
         '\nom.n2(p, outfile="{}.html")'.format(name, name, f_name)
+    )
     string = LS[i] + suf
     exec(string)
 
