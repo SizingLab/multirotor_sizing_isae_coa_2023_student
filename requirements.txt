@@ -7,3 +7,4 @@ openpyxl
 xlrd
 pandas
 jupyterlab
+pysizing
