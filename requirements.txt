@@ -8,3 +8,4 @@ xlrd
 pandas
 jupyterlab
 pysizing
+fast-oad
