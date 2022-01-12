@@ -8,11 +8,11 @@
       <density units="kg/m**3" is_input="True">1.18<!--Air density--></density>
     </atmosphere>
     <duration>
-      <hover units="min" is_input="True">25.0</hover>
+      <hover units="min" is_input="True">18.0</hover>
     </duration>
     <payload>
       <mass>
-        <max units="kg" is_input="True">50.0<!--Payload mass--></max>
+        <max units="kg" is_input="True">4.0<!--Payload mass--></max>
       </mass>
     </payload>
   </specifications>

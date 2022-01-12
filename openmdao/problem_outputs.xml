@@ -8,50 +8,50 @@
       <density units="kg/m**3" is_input="True">1.18<!--Air density--></density>
     </atmosphere>
     <duration>
-      <hover units="min" is_input="True">25.0</hover>
+      <hover units="min" is_input="True">18.0</hover>
     </duration>
     <payload>
       <mass>
-        <max units="kg" is_input="True">50.0<!--Payload mass--></max>
+        <max units="kg" is_input="True">4.0<!--Payload mass--></max>
       </mass>
     </payload>
   </specifications>
   <data>
     <ESC>
-      <mass units="kg" is_input="False">0.17023231357990154<!--ESC mass--></mass>
-      <power units="W" is_input="False">4600.713309620295<!--Maximum ESC power--></power>
-      <voltage units="V" is_input="False">38.32082803185025<!--ESC voltage--></voltage>
+      <mass units="kg" is_input="False">0.009676856687073479<!--ESC mass--></mass>
+      <power units="W" is_input="False">261.52757029064674<!--Maximum ESC power--></power>
+      <voltage units="V" is_input="False">13.649731716348203<!--ESC voltage--></voltage>
       <reference>
         <mass units="kg" is_input="True">0.115<!--ESC mass reference for scaling law--></mass>
         <power units="W" is_input="True">3108.0<!--ESC max. power reference for scaling law--></power>
       </reference>
     </ESC>
     <battery>
-      <capacity units="A*s" is_input="False">531861.9118541204<!--Battery capacity--></capacity>
-      <current units="A" is_input="False">354.57460790262246<!--Maximum battery current--></current>
-      <energy units="J" is_input="False">20381388.8806324<!--Battery energy--></energy>
-      <mass units="kg" is_input="False">32.16759608685669<!--Battery mass--></mass>
-      <voltage units="V" is_input="False">38.32082806903952<!--Battery voltage--><guess units="V" is_input="False">38.32082806903952<!--Initial guess of Battery voltage for motor sizing--></guess></voltage>
+      <capacity units="A*s" is_input="False">60896.1955928332<!--Battery capacity--></capacity>
+      <current units="A" is_input="False">56.385366290165095<!--Maximum battery current--></current>
+      <energy units="J" is_input="False">831216.7323893142<!--Battery energy--></energy>
+      <mass units="kg" is_input="False">1.3118950953114177<!--Battery mass--></mass>
+      <voltage units="V" is_input="False">13.649731716362576<!--Battery voltage--><guess units="V" is_input="False">13.649731716362576<!--Initial guess of Battery voltage for motor sizing--></guess></voltage>
       <reference>
         <energy units="J" is_input="True">260568.0<!--Battery energy reference for scaling law--></energy>
         <mass units="kg" is_input="True">0.329<!--Battery mass reference for scaling law--></mass>
       </reference>
       <cell>
         <number>
-          <series is_input="False">10.35698055919987<!--Cell number in series--></series>
+          <series is_input="False">3.6891166800979933<!--Cell number in series--></series>
         </number>
       </cell>
     </battery>
     <motor>
-      <mass units="kg" is_input="False">3.85190146653734<!--Motor mass--></mass>
-      <resistance units="ohm" is_input="False">0.06622998300620521<!--Motor resistance--></resistance>
+      <mass units="kg" is_input="False">0.12991306726091847<!--Motor mass--></mass>
+      <resistance units="ohm" is_input="False">0.18930145130698625<!--Motor resistance--></resistance>
       <current>
-        <hover units="A" is_input="False">96.22714554915183<!--Motor current (hover)--></hover>
-        <takeoff units="A" is_input="False">120.05777383859149<!--Motor current (takeoff)--></takeoff>
+        <hover units="A" is_input="False">15.389445767586041<!--Motor current (hover)--></hover>
+        <takeoff units="A" is_input="False">19.15990553698146<!--Motor current (takeoff)--></takeoff>
       </current>
       <power>
-        <hover units="W" is_input="False">3227.0532394323304<!--Motor power (hover)--></hover>
-        <takeoff units="W" is_input="False">4600.713305156437<!--Motor power (takeoff)--></takeoff>
+        <hover units="W" is_input="False">182.79071661502707<!--Motor power (hover)--></hover>
+        <takeoff units="W" is_input="False">261.52757029059933<!--Motor power (takeoff)--></takeoff>
       </power>
       <reference>
         <mass units="kg" is_input="True">0.575<!--Motor mass reference for scaling law--></mass>
@@ -64,29 +64,29 @@
         </torque>
       </reference>
       <torque>
-        <coefficient units="N*m/A" is_input="False">0.21748403715208153<!--Motor torque coefficient--></coefficient>
-        <friction units="N*m" is_input="False">0.20096877216716558<!--Motor friction torque--></friction>
-        <max is_input="False">25.90968057374258<!--Maximum motor torque--></max>
-        <nominal units="N*m" is_input="False">21.338466074221788<!--Nominal motor torque--></nominal>
+        <coefficient units="N*m/A" is_input="False">0.02181683560282054<!--Motor torque coefficient--></coefficient>
+        <friction units="N*m" is_input="False">0.006778073074482704<!--Motor friction torque--></friction>
+        <max is_input="False">0.4967097339851766<!--Maximum motor torque--></max>
+        <nominal units="N*m" is_input="False">0.4090758192565174<!--Nominal motor torque--></nominal>
       </torque>
       <voltage>
-        <hover units="V" is_input="False">33.53578889840378<!--Motor voltage (hover)--></hover>
-        <takeoff units="V" is_input="False">38.3208280318586<!--Motor voltage (takeoff)--></takeoff>
+        <hover units="V" is_input="False">11.877667290658984<!--Motor voltage (hover)--></hover>
+        <takeoff units="V" is_input="False">13.649731716360101<!--Motor voltage (takeoff)--></takeoff>
       </voltage>
     </motor>
     <propeller>
-      <mass units="kg" is_input="False">0.485799628031743<!--Propeller mass--></mass>
+      <mass units="kg" is_input="False">0.0357238295370281<!--Propeller mass--></mass>
       <number is_input="False">4.0<!--Number of propellers--></number>
       <aerodynamics>
-        <CP is_input="False">0.02768000000000838<!--Propeller power coefficient in static conditions--></CP>
-        <CT is_input="False">0.08590000000001241<!--Propeller thrust coefficient in static conditions--></CT>
+        <CP is_input="False">0.02768<!--Propeller power coefficient in static conditions--></CP>
+        <CT is_input="False">0.0859<!--Propeller thrust coefficient in static conditions--></CT>
       </aerodynamics>
       <geometry>
-        <diameter units="m" is_input="False">1.5877684307568052<!--Propeller diameter--></diameter>
+        <diameter units="m" is_input="False">0.4305638640195595<!--Propeller diameter--></diameter>
       </geometry>
       <power>
-        <hover units="W" is_input="False">2588.6858876734714<!--Propeller power (hover)--></hover>
-        <takeoff units="W" is_input="False">3618.019785105894<!--Propeller power (takeoff)--></takeoff>
+        <hover units="W" is_input="False">135.1724250908684<!--Propeller power (hover)--></hover>
+        <takeoff units="W" is_input="False">188.92076118939107<!--Propeller power (takeoff)--></takeoff>
       </power>
       <reference>
         <diameter units="m" is_input="True">0.279<!--Propeller diameter reference for scaling law--></diameter>
@@ -96,33 +96,33 @@
         </ND>
       </reference>
       <speed_Hz>
-        <hover units="Hz" is_input="False">19.877655054218124<!--Propeller speed in hover (Hz)--></hover>
-        <takeoff units="Hz" is_input="False">22.224347049166752<!--Propeller speed in takeoff (Hz)--></takeoff>
+        <hover units="Hz" is_input="False">65.39592808168392<!--Propeller speed in hover (Hz)--></hover>
+        <takeoff units="Hz" is_input="False">73.11636092514242<!--Propeller speed in takeoff (Hz)--></takeoff>
       </speed_Hz>
       <speed_rad_s>
-        <hover units="rad/s" is_input="False">124.89499017784736<!--Propeller speed in hover (rad/s)--></hover>
-        <takeoff units="rad/s" is_input="False">139.63969084098454<!--Propeller speed in takeoff (rad/s)--></takeoff>
+        <hover units="rad/s" is_input="False">410.89473447220934<!--Propeller speed in hover (rad/s)--></hover>
+        <takeoff units="rad/s" is_input="False">459.4036446792945<!--Propeller speed in takeoff (rad/s)--></takeoff>
       </speed_rad_s>
       <thrust>
-        <hover units="N" is_input="False">254.53887578842728<!--Propeller thrust (hover)--></hover>
-        <takeoff units="N" is_input="False">318.186568174667<!--Propeller thrust (takeoff)--></takeoff>
+        <hover units="N" is_input="False">14.897963227723793<!--Propeller thrust (hover)--></hover>
+        <takeoff units="N" is_input="False">18.623213359997642<!--Propeller thrust (takeoff)--></takeoff>
       </thrust>
       <torque>
-        <hover units="N*m" is_input="False">20.726899325483327<!--Propeller torque (hover)--></hover>
-        <takeoff units="N*m" is_input="False">25.90968057374127<!--Propeller torque (takeoff)--></takeoff>
+        <hover units="N*m" is_input="False">0.32897093525546434<!--Propeller torque (hover)--></hover>
+        <takeoff units="N*m" is_input="False">0.41123043619141275<!--Propeller torque (takeoff)--></takeoff>
       </torque>
     </propeller>
     <structure>
-      <mass units="kg" is_input="False">3.5881833442289093<!--Total mass of the frame--></mass>
+      <mass units="kg" is_input="False">0.06145263396002592<!--Total mass of the frame--></mass>
       <arms>
         <angle units="rad" is_input="False">1.5707963267948966<!--Seperation angle between propellers--></angle>
-        <length units="m" is_input="False">1.1227218243420602<!--Arms length--></length>
-        <mass units="kg" is_input="False">1.4352733376915638<!--Total arms mass--></mass>
+        <length units="m" is_input="False">0.3044546279821131<!--Arms length--></length>
+        <mass units="kg" is_input="False">0.024581053584010366<!--Total arms mass--></mass>
         <number is_input="True">4.0<!--Number of arms--></number>
         <prop_per_arm is_input="True">1.0<!--Number of propellers per arm (single or coaxial configuration)--></prop_per_arm>
         <diameter>
-          <inner units="m" is_input="False">0.10857766194148796<!--Inner diameter of the beam--></inner>
-          <outer units="m" is_input="False">0.10967440600158207<!--Outer diameter of the beam--></outer>
+          <inner units="m" is_input="False">0.027286524073005983<!--Inner diameter of the beam--></inner>
+          <outer units="m" is_input="False">0.02756214552828887<!--Outer diameter of the beam--></outer>
         </diameter>
         <material>
           <density units="kg/m**3" is_input="True">1700.0<!--Arms material density--></density>
@@ -132,40 +132,40 @@
         </material>
       </arms>
       <body>
-        <mass units="kg" is_input="False">2.1529100065373457<!--Body mass--></mass>
+        <mass units="kg" is_input="False">0.03687158037601555<!--Body mass--></mass>
       </body>
     </structure>
     <system>
       <MTOW>
-        <guess units="kg" is_input="False">103.7875130635789<!--Initial guess of Maximum Take Off Weight for sizing scenarios--></guess>
+        <guess units="kg" is_input="False">6.074602743210517<!--Initial guess of Maximum Take Off Weight for sizing scenarios--></guess>
       </MTOW>
     </system>
   </data>
   <optim>
     <constraint>
-      <c_1 is_input="False">-1.0264500360790407e-10</c_1>
-      <c_2 is_input="False">3.7180917900059285e-08</c_2>
-      <c_3 is_input="False">1.3109513474773848e-12</c_3>
-      <c_4 is_input="False">3.7189273882631824e-08</c_4>
-      <c_5 is_input="False">-8.355982572538778e-12</c_5>
-      <c_6 is_input="False">8.775202786637237e-12</c_6>
-      <c_7 is_input="False">256.21248693631844</c_7>
+      <c_1 is_input="False">-1.007194327939942e-12</c_1>
+      <c_2 is_input="False">2.474465077284549e-12</c_2>
+      <c_3 is_input="False">0.08547929779376384</c_3>
+      <c_4 is_input="False">1.4372503187587427e-11</c_4>
+      <c_5 is_input="False">-1.1898038110302878e-11</c_5>
+      <c_6 is_input="False">-1.6112622347463912e-10</c_6>
+      <c_7 is_input="False">353.9253972567885</c_7>
     </constraint>
     <objective>
-      <MTOW units="kg" is_input="False">103.78751306368154</MTOW>
+      <MTOW units="kg" is_input="False">6.074602743211524</MTOW>
       <autonomy>
-        <hover units="min" is_input="False">25.000000000008775</hover>
+        <hover units="min" is_input="False">17.999999999838874</hover>
       </autonomy>
     </objective>
     <variable>
-      <beta_pro is_input="True">0.3000000000000862<!--pitch/diameter ratio of the propeller--></beta_pro>
-      <k_D is_input="True">0.9899999999992862<!--aspect ratio D_in/D_out for the arms--></k_D>
-      <k_ND is_input="True">1.2666095804153081<!--slow down propeller coeffiecient : ND = NDmax / k_ND--></k_ND>
-      <k_mb is_input="True">0.6433519217371338<!--over estimation coefficient on the battery load mass--></k_mb>
-      <k_mot is_input="True">1.029505944865885<!--over estimation coefficient on the motor torque--></k_mot>
-      <k_os is_input="True">2.075750261271578<!--over estimation coefficient on the load mass--></k_os>
-      <k_speed_mot is_input="True">1.261823525874988<!--over estimation coefficient on the motor speed--></k_speed_mot>
-      <k_vb is_input="True">1.090354008726279<!--over estimation coefficient on the battery voltage--></k_vb>
+      <beta_pro is_input="True">0.3<!--pitch/diameter ratio of the propeller--></beta_pro>
+      <k_D is_input="True">0.99<!--aspect ratio D_in/D_out for the arms--></k_D>
+      <k_ND is_input="True">1.419733387638862<!--slow down propeller coeffiecient : ND = NDmax / k_ND--></k_ND>
+      <k_mb is_input="True">0.3279737738278544<!--over estimation coefficient on the battery load mass--></k_mb>
+      <k_mot is_input="True">1.243501402149242<!--over estimation coefficient on the motor torque--></k_mot>
+      <k_os is_input="True">1.5186506858026292<!--over estimation coefficient on the load mass--></k_os>
+      <k_speed_mot is_input="True">1.3618771086392056<!--over estimation coefficient on the motor speed--></k_speed_mot>
+      <k_vb is_input="True">1.1242052399606908<!--over estimation coefficient on the battery voltage--></k_vb>
     </variable>
   </optim>
 </FASTOAD_model>
