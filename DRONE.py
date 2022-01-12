@@ -3,17 +3,18 @@ import fastoad.api as oad
 import numpy as np
 
 
-@oad.RegisterOpenMDAOSystem("drone")
+@oad.RegisterOpenMDAOSystem('drone')
 class DRONE(om.Group):
-    def setup(self):
-        self.add_subsystem("SCENARIOS", SCENARIOS(), promotes=["*"])
-        self.add_subsystem("PROPELLER", PROPELLER(), promotes=["*"])
-        self.add_subsystem("MOTOR", MOTOR(), promotes=["*"])
-        self.add_subsystem("BATTERY", BATTERY(), promotes=["*"])
-        self.add_subsystem("ESC", ESC(), promotes=["*"])
-        self.add_subsystem("FRAME", FRAME(), promotes=["*"])
-        self.add_subsystem("OBJECTIVES", OBJECTIVES(), promotes=["*"])
-        self.add_subsystem("CONSTRAINTS", CONSTRAINTS(), promotes=["*"])
+
+	def setup(self):
+		self.add_subsystem("SCENARIOS", SCENARIOS(), promotes=["*"])
+		self.add_subsystem("PROPELLER", PROPELLER(), promotes=["*"])
+		self.add_subsystem("MOTOR", MOTOR(), promotes=["*"])
+		self.add_subsystem("BATTERY", BATTERY(), promotes=["*"])
+		self.add_subsystem("ESC", ESC(), promotes=["*"])
+		self.add_subsystem("FRAME", FRAME(), promotes=["*"])
+		self.add_subsystem("OBJECTIVES", OBJECTIVES(), promotes=["*"])
+		self.add_subsystem("CONSTRAINTS", CONSTRAINTS(), promotes=["*"])
 
 
 class SCENARIOS(om.ExplicitComponent):
@@ -54,7 +55,6 @@ class SCENARIOS(om.ExplicitComponent):
         outputs["data:propeller:number"] = N_pro
         outputs["data:propeller:thrust:hover"] = F_pro_hov
         outputs["data:propeller:thrust:takeoff"] = F_pro_to
-
 
 class PROPELLER(om.ExplicitComponent):
     def setup(self):
@@ -135,7 +135,6 @@ class PROPELLER(om.ExplicitComponent):
         outputs["data:propeller:power:hover"] = P_pro_hov
         outputs["data:propeller:torque:hover"] = T_pro_hov
         outputs["data:battery:voltage:guess"] = U_bat_est
-
 
 class MOTOR(om.ExplicitComponent):
     def setup(self):
@@ -233,7 +232,6 @@ class MOTOR(om.ExplicitComponent):
         outputs["data:motor:voltage:takeoff"] = U_mot_to
         outputs["data:motor:power:takeoff"] = P_el_mot_to
 
-
 class BATTERY(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:battery:voltage:guess", val=np.nan, units="V")
@@ -281,7 +279,6 @@ class BATTERY(om.ExplicitComponent):
         outputs["data:battery:capacity"] = C_bat
         outputs["data:battery:current"] = I_bat
 
-
 class ESC(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:motor:power:takeoff", val=np.nan, units="W")
@@ -312,7 +309,6 @@ class ESC(om.ExplicitComponent):
         outputs["data:ESC:power"] = P_esc
         outputs["data:ESC:mass"] = M_esc
         outputs["data:ESC:voltage"] = V_esc
-
 
 class FRAME(om.ExplicitComponent):
     def setup(self):
@@ -379,7 +375,6 @@ class FRAME(om.ExplicitComponent):
         outputs["data:structure:body:mass"] = M_body
         outputs["data:structure:mass"] = M_frame
 
-
 class OBJECTIVES(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:battery:capacity", val=np.nan, units="A*s")
@@ -416,7 +411,6 @@ class OBJECTIVES(om.ExplicitComponent):
 
         outputs["optim:objective:autonomy:hover"] = t_hov
         outputs["optim:objective:MTOW"] = M_total_real
-
 
 class CONSTRAINTS(om.ExplicitComponent):
     def setup(self):
@@ -468,3 +462,4 @@ class CONSTRAINTS(om.ExplicitComponent):
         outputs["optim:constraint:c_5"] = cons_5
         outputs["optim:constraint:c_6"] = cons_6
         outputs["optim:constraint:c_7"] = cons_7
+
