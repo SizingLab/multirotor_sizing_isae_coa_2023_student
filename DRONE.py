@@ -3,26 +3,29 @@ import fastoad.api as oad
 import numpy as np
 
 
-@oad.RegisterOpenMDAOSystem("drone")
+@oad.RegisterOpenMDAOSystem('drone')
 class DRONE(om.Group):
-    def setup(self):
-        self.add_subsystem("SCENARIOS", SCENARIOS(), promotes=["*"])
-        self.add_subsystem("PROPELLER", PROPELLER(), promotes=["*"])
-        self.add_subsystem("MOTOR", MOTOR(), promotes=["*"])
-        self.add_subsystem("BATTERY", BATTERY(), promotes=["*"])
-        self.add_subsystem("ESC", ESC(), promotes=["*"])
-        self.add_subsystem("FRAME", FRAME(), promotes=["*"])
-        self.add_subsystem("OBJECTIVES", OBJECTIVES(), promotes=["*"])
-        self.add_subsystem("CONSTRAINTS", CONSTRAINTS(), promotes=["*"])
+
+	def setup(self):
+		self.add_subsystem("SCENARIOS", SCENARIOS(), promotes=["*"])
+		self.add_subsystem("PROPELLER", PROPELLER(), promotes=["*"])
+		self.add_subsystem("MOTOR", MOTOR(), promotes=["*"])
+		self.add_subsystem("BATTERY", BATTERY(), promotes=["*"])
+		self.add_subsystem("ESC", ESC(), promotes=["*"])
+		self.add_subsystem("FRAME", FRAME(), promotes=["*"])
+		self.add_subsystem("OBJECTIVES", OBJECTIVES(), promotes=["*"])
+		self.add_subsystem("CONSTRAINTS", CONSTRAINTS(), promotes=["*"])
 
 
 class SCENARIOS(om.ExplicitComponent):
     def setup(self):
         self.add_input("optim:variable:k_os", val=np.nan)
-        self.add_input("specifications:payload:mass:max", val=np.nan)
+        self.add_input("specifications:payload:mass:max", val=np.nan, units="kg")
         self.add_input("data:structure:arms:prop_per_arm", val=np.nan)
         self.add_input("data:structure:arms:number", val=np.nan)
-        self.add_input("specifications:acceleration:takeoff", val=np.nan)
+        self.add_input(
+            "specifications:acceleration:takeoff", val=np.nan, units="m/s**2"
+        )
         self.add_output("data:system:MTOW:guess", units="kg")
         self.add_output("data:propeller:number")
         self.add_output("data:propeller:thrust:hover", units="N")
@@ -53,16 +56,15 @@ class SCENARIOS(om.ExplicitComponent):
         outputs["data:propeller:thrust:hover"] = F_pro_hov
         outputs["data:propeller:thrust:takeoff"] = F_pro_to
 
-
 class PROPELLER(om.ExplicitComponent):
     def setup(self):
         self.add_input("optim:variable:beta_pro", val=np.nan)
         self.add_input("data:propeller:thrust:takeoff", val=np.nan, units="N")
-        self.add_input("specifications:atmosphere:density", val=np.nan)
-        self.add_input("data:propeller:reference:ND:max", val=np.nan)
+        self.add_input("specifications:atmosphere:density", val=np.nan, units="kg/m**3")
+        self.add_input("data:propeller:reference:ND:max", val=np.nan, units="Hz*m")
         self.add_input("optim:variable:k_ND", val=np.nan)
-        self.add_input("data:propeller:reference:mass", val=np.nan)
-        self.add_input("data:propeller:reference:diameter", val=np.nan)
+        self.add_input("data:propeller:reference:mass", val=np.nan, units="kg")
+        self.add_input("data:propeller:reference:diameter", val=np.nan, units="m")
         self.add_input("data:propeller:thrust:hover", val=np.nan, units="N")
         self.add_input("optim:variable:k_vb", val=np.nan)
         self.add_output("data:propeller:aerodynamics:CT")
@@ -134,20 +136,21 @@ class PROPELLER(om.ExplicitComponent):
         outputs["data:propeller:torque:hover"] = T_pro_hov
         outputs["data:battery:voltage:guess"] = U_bat_est
 
-
 class MOTOR(om.ExplicitComponent):
     def setup(self):
         self.add_input("optim:variable:k_mot", val=np.nan)
         self.add_input("data:propeller:torque:hover", val=np.nan, units="N*m")
-        self.add_input("data:motor:reference:mass", val=np.nan)
-        self.add_input("data:motor:reference:torque:nominal", val=np.nan)
+        self.add_input("data:motor:reference:mass", val=np.nan, units="kg")
+        self.add_input("data:motor:reference:torque:nominal", val=np.nan, units="N*m")
         self.add_input("data:battery:voltage:guess", val=np.nan, units="V")
         self.add_input("optim:variable:k_speed_mot", val=np.nan)
         self.add_input("data:propeller:speed_rad_s:takeoff", val=np.nan, units="rad/s")
-        self.add_input("data:motor:reference:resistance", val=np.nan)
-        self.add_input("data:motor:reference:torque:coefficient", val=np.nan)
-        self.add_input("data:motor:reference:torque:friction", val=np.nan)
-        self.add_input("data:motor:reference:torque:max", val=np.nan)
+        self.add_input("data:motor:reference:resistance", val=np.nan, units="ohm")
+        self.add_input(
+            "data:motor:reference:torque:coefficient", val=np.nan, units="N*m/A"
+        )
+        self.add_input("data:motor:reference:torque:friction", val=np.nan, units="N*m")
+        self.add_input("data:motor:reference:torque:max", val=np.nan, units="N*m")
         self.add_input("data:propeller:speed_rad_s:hover", val=np.nan, units="rad/s")
         self.add_input("data:propeller:torque:takeoff", val=np.nan, units="N*m")
         self.add_output("data:motor:torque:nominal", units="N*m")
@@ -229,14 +232,13 @@ class MOTOR(om.ExplicitComponent):
         outputs["data:motor:voltage:takeoff"] = U_mot_to
         outputs["data:motor:power:takeoff"] = P_el_mot_to
 
-
 class BATTERY(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:battery:voltage:guess", val=np.nan, units="V")
         self.add_input("optim:variable:k_mb", val=np.nan)
-        self.add_input("specifications:payload:mass:max", val=np.nan)
-        self.add_input("data:battery:reference:energy", val=np.nan)
-        self.add_input("data:battery:reference:mass", val=np.nan)
+        self.add_input("specifications:payload:mass:max", val=np.nan, units="kg")
+        self.add_input("data:battery:reference:energy", val=np.nan, units="J")
+        self.add_input("data:battery:reference:mass", val=np.nan, units="kg")
         self.add_input("data:motor:power:hover", val=np.nan, units="W")
         self.add_input("data:propeller:number", val=np.nan)
         self.add_output("data:battery:cell:number:series")
@@ -277,14 +279,13 @@ class BATTERY(om.ExplicitComponent):
         outputs["data:battery:capacity"] = C_bat
         outputs["data:battery:current"] = I_bat
 
-
 class ESC(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:motor:power:takeoff", val=np.nan, units="W")
         self.add_input("data:battery:voltage", val=np.nan, units="V")
         self.add_input("data:motor:voltage:takeoff", val=np.nan, units="V")
-        self.add_input("data:ESC:reference:mass", val=np.nan)
-        self.add_input("data:ESC:reference:power", val=np.nan)
+        self.add_input("data:ESC:reference:mass", val=np.nan, units="kg")
+        self.add_input("data:ESC:reference:power", val=np.nan, units="W")
         self.add_output("data:ESC:power", units="W")
         self.add_output("data:ESC:mass", units="kg")
         self.add_output("data:ESC:voltage", units="V")
@@ -309,16 +310,19 @@ class ESC(om.ExplicitComponent):
         outputs["data:ESC:mass"] = M_esc
         outputs["data:ESC:voltage"] = V_esc
 
-
 class FRAME(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:structure:arms:number", val=np.nan)
         self.add_input("data:propeller:geometry:diameter", val=np.nan, units="m")
         self.add_input("data:propeller:thrust:takeoff", val=np.nan, units="N")
         self.add_input("data:structure:arms:prop_per_arm", val=np.nan)
-        self.add_input("data:structure:arms:material:stress:max", val=np.nan)
+        self.add_input(
+            "data:structure:arms:material:stress:max", val=np.nan, units="N/m**2"
+        )
         self.add_input("optim:variable:k_D", val=np.nan)
-        self.add_input("data:structure:arms:material:density", val=np.nan)
+        self.add_input(
+            "data:structure:arms:material:density", val=np.nan, units="kg/m**3"
+        )
         self.add_output("data:structure:arms:angle", units="rad")
         self.add_output("data:structure:arms:length", units="m")
         self.add_output("data:structure:arms:diameter:outer", units="m")
@@ -371,7 +375,6 @@ class FRAME(om.ExplicitComponent):
         outputs["data:structure:body:mass"] = M_body
         outputs["data:structure:mass"] = M_frame
 
-
 class OBJECTIVES(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:battery:capacity", val=np.nan, units="A*s")
@@ -380,7 +383,7 @@ class OBJECTIVES(om.ExplicitComponent):
         self.add_input("data:propeller:mass", val=np.nan, units="kg")
         self.add_input("data:motor:mass", val=np.nan, units="kg")
         self.add_input("data:propeller:number", val=np.nan)
-        self.add_input("specifications:payload:mass:max", val=np.nan)
+        self.add_input("specifications:payload:mass:max", val=np.nan, units="kg")
         self.add_input("data:battery:mass", val=np.nan, units="kg")
         self.add_input("data:structure:mass", val=np.nan, units="kg")
         self.add_output("optim:objective:autonomy:hover", units="min")
@@ -409,7 +412,6 @@ class OBJECTIVES(om.ExplicitComponent):
         outputs["optim:objective:autonomy:hover"] = t_hov
         outputs["optim:objective:MTOW"] = M_total_real
 
-
 class CONSTRAINTS(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:system:MTOW:guess", val=np.nan, units="kg")
@@ -420,8 +422,8 @@ class CONSTRAINTS(om.ExplicitComponent):
         self.add_input("data:propeller:torque:takeoff", val=np.nan, units="N*m")
         self.add_input("data:ESC:voltage", val=np.nan, units="V")
         self.add_input("optim:objective:autonomy:hover", val=np.nan, units="min")
-        self.add_input("specifications:duration:hover", val=np.nan)
-        self.add_input("specifications:MTOW", val=np.nan)
+        self.add_input("specifications:duration:hover", val=np.nan, units="min")
+        self.add_input("specifications:MTOW", val=np.nan, units="kg")
         self.add_output("optim:constraint:c_1")
         self.add_output("optim:constraint:c_2")
         self.add_output("optim:constraint:c_3")
@@ -460,3 +462,4 @@ class CONSTRAINTS(om.ExplicitComponent):
         outputs["optim:constraint:c_5"] = cons_5
         outputs["optim:constraint:c_6"] = cons_6
         outputs["optim:constraint:c_7"] = cons_7
+

@@ -2,16 +2,16 @@
 
 *This set of documents aims to provide an introduction on the use of Python and Jupyter notebooks for the sizing of multi-rotor drones.*
 
-*Written by Marc Budinger (INSA Toulouse) and Scott Delbecq (ISAE-SUPAERO), Toulouse, France.*
+*Written by Marc Budinger (INSA Toulouse), Scott Delbecq (ISAE-SUPAERO) and Félix Pollet (ISAE-SUPAERO), Toulouse, France.*
 
 ### Organization
 
-- 15/01/2021 A.M - Lecture on the **Preliminary design of mechatronic systems** (3 * 1 hour Zoom) by Marc Budinger
-- 15/01/2021 P.M - Lab work on the **Preliminary sizing of multirotor drones** (3 * 1 hour Presential)
+- 7/01/2022 A.M - Lecture on the **Preliminary design of mechatronic systems** (4 * 1 hour Presential) by Marc Budinger
+- 113/01/2022 A.M - Lab work on the **Preliminary sizing of multirotor drones** (3 * 1 hour Presential) by Scott Delbecq and Félix Pollet
     * Architecture & sizing scenarios
     * Estimation models
     * Component sizing code (Propeller and motor)
- - 29/01/2021 A.M - Lab work on the **Preliminary sizing of multirotor drones** (4 * 1 hour Presential)   
+ - 20/01/2022 A.M - Lab work on the **Preliminary sizing of multirotor drones** (3 * 1 hour Presential) by Scott Delbecq and Félix Pollet 
     * Component sizing code (Battery/ESC and frame)
     * System sizing code and optimization
     
@@ -20,7 +20,7 @@ You will be evaluated on a synthetic presentation (e.g. notebooks or Word or Pow
 You will also be asked to send your notebooks with the sizing and optimization code working.
 
 The following notebooks have two versions (Student and Teacher). The student versions have missing parts in the code that you will have to re-write.
-The sizing and optimization Teacher code is not provided. However, you have a Reference version with a compiled model to compare and verify your results.
+The sizing and optimization Teacher code is not provided.
 
 ### Table of contents
 
@@ -43,10 +43,9 @@ The sizing and optimization Teacher code is not provided. However, you have a Re
     d. [Frame](05d_FrameSelection-Student.ipynb)
 
 ##### System sizing code and optimization  
-6. 
-    a. [Drone Sizing Code and Optimization - Student Version](06_SystemSizingCodeOptimization-Student.ipynb)
-    
-    b. [Drone Sizing Code and Optimization - Reference Version](06_SystemSizingCodeOptimization-Reference.ipynb)
+6. [Drone Sizing Code - Student Version](06_SystemSizingCodeOptimization-Student.ipynb)
+7. [Drone Evaluation and Optimization - Student Version](07_SystemEvaluationAndOptimization.ipynb)
+   
 ##### Appendices  
 A1. [Quadrotor description](A1_QuadroDescription.ipynb)
 
@@ -70,14 +69,11 @@ openpyxl
 xlrd
 pandas
 jupyterlab
+pysizing
+fast-oad
 
 To install all the dependencies:
 *pip install --user -r requirements.txt*
-
-To install a single dependency:
-*pip install --user cloudpickle*
-
-*pip install  --proxy=http://proxy.isae.fr:3128 --user cloudpickle* (if connected to ISAE-SUPAERO network)
 
 To run your notebooks from the root:
 

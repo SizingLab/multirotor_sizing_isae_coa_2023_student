@@ -32,14 +32,13 @@ def format_imports(imports):
     return res
 
 
-TEXT = "# Exclude\n" \
-       "x = 0\n" \
-       "y1 = 2\n" \
-       "z3 = 1.1e-3   \n"
-IMPORTS = "import numpy as np\n" \
-          "import math\n\n" \
-          "import matplotlib as plt\n" \
-          "# random comment"
+TEXT = "# Exclude\n" "x = 0\n" "y1 = 2\n" "z3 = 1.1e-3   \n"
+IMPORTS = (
+    "import numpy as np\n"
+    "import math\n\n"
+    "import matplotlib as plt\n"
+    "# random comment"
+)
 
 
 def main():

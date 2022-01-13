@@ -1,5 +1,5 @@
 class Pack:
-    def __init__(self, name='default_pack', short=False, nick='def_pack'):
+    def __init__(self, name="default_pack", short=False, nick="def_pack"):
         self.name = name
         self.short = short
         self.nick = nick
@@ -9,7 +9,17 @@ class Pack:
         self.elements.append(elt)
 
     def __str__(self):
-        return "|" + self.name + "||" + str(self.short) + "||" + self.nick + '||' + self.elements + '|'
+        return (
+            "|"
+            + self.name
+            + "||"
+            + str(self.short)
+            + "||"
+            + self.nick
+            + "||"
+            + self.elements
+            + "|"
+        )
 
 
 def parse_pack(str):
@@ -17,7 +27,7 @@ def parse_pack(str):
     :param str: string to get packages from
     :return: a list of Pack class elements
     """
-    spt = str.split('\n')
+    spt = str.split("\n")
     pack = []
     for x in spt:
         x = x.strip()
@@ -74,5 +84,5 @@ def main():
     print(string_pack(parse_pack(PACKS)))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

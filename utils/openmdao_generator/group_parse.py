@@ -7,7 +7,7 @@ def is_empty(str):
     :return: a boolean, True if the string is empty meaning contains only spaces, tabs and line breaks
     """
     for l in str:
-        if l != ' ' and l != '\n' and l != '\t':
+        if l != " " and l != "\n" and l != "\t":
             return False
     return True
 
@@ -30,9 +30,9 @@ def format_group(gr):
     :param gr: group name
     :return: removes spaces before and after the name
     """
-    while len(gr) > 1 and gr[0] == ' ':
+    while len(gr) > 1 and gr[0] == " ":
         gr = gr[1:]
-    while len(gr) > 1 and gr[-1] == ' ':
+    while len(gr) > 1 and gr[-1] == " ":
         gr = gr[:-1]
     return gr
 
@@ -50,7 +50,7 @@ def parse_group(str):
             p_str.remove(x)
 
     for c in p_str:
-        g = c.split('\n', 1)
+        g = c.split("\n", 1)
         g[0] = format_group(g[0])
         g[1] = format_str(g[1])
         groups.append([g[0], g[1]])
@@ -58,35 +58,37 @@ def parse_group(str):
     return groups
 
 
-TEXT = "\n" \
-       "#%% Group1\n" \
-       "#% Component1\n" \
-       "\n" \
-       "\n" \
-       "x = y*3 +2\n" \
-       "z = w**2 +a*4\n" \
-       "\n" \
-       "#% Component2\n" \
-       "a = b + c*2\n" \
-       "d = e + f\n" \
-       "#%% Group2\n" \
-       "\n" \
-       "\n" \
-       "#% Component3\n" \
-       "\n" \
-       "\n" \
-       "x = y*3 +5\n" \
-       "z = w**2 +a*3\n" \
-       "\n" \
-       "#% Component4\n" \
-       "a = b + c*6\n" \
-       "d = e + f*3\n" \
-       "\n"
+TEXT = (
+    "\n"
+    "#%% Group1\n"
+    "#% Component1\n"
+    "\n"
+    "\n"
+    "x = y*3 +2\n"
+    "z = w**2 +a*4\n"
+    "\n"
+    "#% Component2\n"
+    "a = b + c*2\n"
+    "d = e + f\n"
+    "#%% Group2\n"
+    "\n"
+    "\n"
+    "#% Component3\n"
+    "\n"
+    "\n"
+    "x = y*3 +5\n"
+    "z = w**2 +a*3\n"
+    "\n"
+    "#% Component4\n"
+    "a = b + c*6\n"
+    "d = e + f*3\n"
+    "\n"
+)
 
 
 def main():
     print(parse_group(TEXT))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -43,8 +43,8 @@ def parse_eq_rec(var, pack):
     eq_str = format_equation(var.equation, pack)
     for p in var.param:
         if p.output:
-            repl = '(' + parse_eq_rec(p, pack) + ')'
-            eq_str = re.sub(r'(?<=\b)' + p.symbol + r'(?=\b)', repl, eq_str)
+            repl = "(" + parse_eq_rec(p, pack) + ")"
+            eq_str = re.sub(r"(?<=\b)" + p.symbol + r"(?=\b)", repl, eq_str)
     return eq_str
 
 
@@ -89,22 +89,22 @@ def format_derivative(der, const):
     der_list = []
     index = 0
     for i in range(1, len(der)):
-        if der[i-index] == "(" and i > index:
-            if der[i-index-1] in LETTERS:
-                func = der[i-index-1]
+        if der[i - index] == "(" and i > index:
+            if der[i - index - 1] in LETTERS:
+                func = der[i - index - 1]
                 j = 2
-                while j <= i-index and der[i-index-j] in LETTERS:
-                    func = der[i-index-j] + func
+                while j <= i - index and der[i - index - j] in LETTERS:
+                    func = der[i - index - j] + func
                     j += 1
-                der_list.append([der[:i-index], func])
-                der = der[i-index:]
-                index = i+1
+                der_list.append([der[: i - index], func])
+                der = der[i - index :]
+                index = i + 1
     der_fin = ""
     for elt in der_list:
         st = elt[0]
         func = elt[1]
         new_func = "np." + func
-        st = st[:-len(func)]
+        st = st[: -len(func)]
         st += new_func
         der_fin += st
     der_fin += der
@@ -118,21 +118,21 @@ def format_derivative(der, const):
             index = 0
             for i in range(len(der_c)):
                 j = 0
-                while j <= i-index and der_c[i-index-j] == c.short[-j-1]:
-                    if j == l-1:
+                while j <= i - index and der_c[i - index - j] == c.short[-j - 1]:
+                    if j == l - 1:
                         beg = False
-                        if i-index-j == 0:
+                        if i - index - j == 0:
                             beg = True
-                        elif der_c[i-index-j-1] not in LETTERS:
+                        elif der_c[i - index - j - 1] not in LETTERS:
                             beg = True
                         end = False
-                        if i-index == len(der_c) - 1:
+                        if i - index == len(der_c) - 1:
                             end = True
-                        elif der_c[i-index+1] not in LETTERS:
+                        elif der_c[i - index + 1] not in LETTERS:
                             end = True
                         if beg and end:
-                            der_c_list.append(der_c[:i - index + 1])
-                            der_c = der_c[i - index + 1:]
+                            der_c_list.append(der_c[: i - index + 1])
+                            der_c = der_c[i - index + 1 :]
                             index = i + 1
                         break
                     j += 1
