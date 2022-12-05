@@ -23,7 +23,7 @@ T_nom_mot_ref || data:motor:reference:torque:nominal
 T_max_mot_ref || data:motor:reference:torque:max
 R_mot_ref || data:motor:reference:resistance
 M_mot_ref || data:motor:reference:mass
-K_mot_ref || data:motor:reference:torque:coefficient
+K_T_ref || data:motor:reference:torque:coefficient
 T_mot_fr_ref || data:motor:reference:torque:friction
 sigma_max || data:structure:arms:material:stress:max
 rho_s || data:structure:arms:material:density
@@ -48,7 +48,7 @@ P_pro_hov || data:propeller:power:hover
 T_pro_hov || data:propeller:torque:hover
 T_nom_mot || data:motor:torque:nominal
 M_mot || data:motor:mass
-K_mot || data:motor:torque:coefficient
+K_T || data:motor:torque:coefficient
 R_mot || data:motor:resistance
 T_mot_fr || data:motor:torque:friction
 T_max_mot || data:motor:torque:max
