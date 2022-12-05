@@ -24,6 +24,8 @@ LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMONPQRSTUVWXYZ"
 PACKAGES = ["numpy.", "np.", "mat.", "math."]
 NAMES_FILENAME = "variable_names.txt"
 NAMES_FILENAME_PATH = "./openmdao"
+# NAMES_FILENAME = "variable_data.txt"
+# NAMES_FILENAME_PATH = "./variable_data"
 # Logger for this module
 _LOGGER = logging.getLogger(__name__)
 
@@ -136,7 +138,7 @@ class Variable:
         self.name = new_name
 
     def update_variable_unit(self, new_unit):
-        self.unit = new_unit
+        self.unit = "None"
 
 
 class Constant:
@@ -264,7 +266,7 @@ def add_var_in(x, var_in, var_out, const, pack, add_p=False):
                 # change name according to variable_names.txt file
                 if x in VariablesExternalData._variable_names:
                     var.update_variable_name(VariablesExternalData._variable_names[x])
-                    # TODO : var.update_variable_unit(VariablesExternalData._variable_names[x])
+                    var.update_variable_unit(VariablesExternalData._variable_names[x])
                 if add_p and out_added:
                     var_out[-1].add_param(var)
                 var_in.append(var)
@@ -311,6 +313,7 @@ def add_var_out(x, var_in, var_out, pack):
         # change name according to variable_names.txt file
         if x in VariablesExternalData._variable_names:
             var.update_variable_name(VariablesExternalData._variable_names[x])
+            var.update_variable_unit(VariablesExternalData._variable_names[x])
         var_out.append(var)
         return [True, var]
     return [False, "None"]
@@ -376,9 +379,11 @@ def get_variables(equation, pack):
     # data_in = [['var_name', 'unit', 0.0]]
     units_out = []
     lines = equation.splitlines()
+
     VariablesExternalData.read_variable_names(
         NAMES_FILENAME_PATH
     )  # read variables names provided in variables_names.txt
+
     for i in range(len(lines)):
         spt = lines[i].split("# [")
         if len(spt) >= 2:
@@ -447,6 +452,7 @@ def get_variables(equation, pack):
                             #             value_in = u[2]
                             #     var.unit = unit_in
                             #     var.val = value_in
+
             else:
                 if contains(x, letters):
                     handle_function(x, var_in, var_out, const, pack)
