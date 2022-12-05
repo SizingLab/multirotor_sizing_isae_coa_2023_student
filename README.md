@@ -1,4 +1,4 @@
-# Sizing of multi-rotor drones
+﻿# Sizing of multi-rotor drones
 
 *This set of documents aims to provide an introduction on the use of Python and Jupyter notebooks for the sizing of multi-rotor drones.*
 
@@ -6,12 +6,11 @@
 
 ### Organization
 
-- 7/01/2022 A.M - Lecture on the **Preliminary design of mechatronic systems** (4 * 1 hour Presential) by Marc Budinger
-- 113/01/2022 A.M - Lab work on the **Preliminary sizing of multirotor drones** (3 * 1 hour Presential) by Scott Delbecq and Félix Pollet
+- Lab Session 1
     * Architecture & sizing scenarios
     * Estimation models
     * Component sizing code (Propeller and motor)
- - 20/01/2022 A.M - Lab work on the **Preliminary sizing of multirotor drones** (3 * 1 hour Presential) by Scott Delbecq and Félix Pollet 
+ - Lab Session 2
     * Component sizing code (Battery/ESC and frame)
     * System sizing code and optimization
     
