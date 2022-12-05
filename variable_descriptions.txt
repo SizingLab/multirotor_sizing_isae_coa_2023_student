@@ -8,7 +8,6 @@ data:battery:capacity || Battery capacity
 data:battery:energy || Battery energy
 data:battery:mass || Battery mass
 data:battery:voltage || Battery voltage
-data:battery:voltage:guess || Initial guess of Battery voltage for motor sizing
 data:battery:volume || Battery volume
 data:battery:cell:number || Cell number
 data:battery:cell:number:series || Cell number in series

@@ -136,7 +136,7 @@ class Variable:
         self.name = new_name
 
     def update_variable_unit(self, new_unit):
-        self.unit = unit = new_unit
+        self.unit = new_unit
 
 
 class Constant:

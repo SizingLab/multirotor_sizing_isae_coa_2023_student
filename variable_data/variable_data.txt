@@ -15,6 +15,8 @@ N_pro_arm || data:structure:arms:prop_per_arm || None
 N_pro || data:propeller:number || None
 M_bat_ref || data:battery:reference:mass || kg
 E_bat_ref || data:battery:reference:energy || J
+I_bat_max_ref || data:battery:reference:current || A
+C_bat_ref || data:battery:reference:capacity || A*s
 P_esc_ref || data:ESC:reference:power || W
 M_esc_ref || data:ESC:reference:mass || kg
 T_nom_mot_ref || data:motor:reference:torque:nominal || N*m
@@ -44,7 +46,6 @@ n_pro_hov || data:propeller:speed_Hz:hover || Hz
 Omega_pro_hov || data:propeller:speed_rad_s:hover || rad/s
 P_pro_hov || data:propeller:power:hover || W
 T_pro_hov || data:propeller:torque:hover || N*m
-U_bat_est || data:battery:voltage:guess || V
 T_nom_mot || data:motor:torque:nominal || N*m
 M_mot || data:motor:mass || kg
 K_mot || data:motor:torque:coefficient || N*m/A
@@ -62,10 +63,12 @@ U_bat || data:battery:voltage || V
 M_bat || data:battery:mass || kg
 E_bat || data:battery:energy || J
 C_bat || data:battery:capacity || A*s
-I_bat || data:battery:current || A
+I_bat_max || data:battery:current:max || A
+P_bat_max || data:battery:power:max || W
+I_bat_hov || data:battery:power:hover || W
 P_esc || data:ESC:power || W
 M_esc || data:ESC:mass || kg
-V_esc || data:ESC:voltage || V
+U_esc || data:ESC:voltage || V
 alpha_sep || data:structure:arms:angle || rad
 L_arm || data:structure:arms:length || m
 D_out_arm || data:structure:arms:diameter:outer || m
