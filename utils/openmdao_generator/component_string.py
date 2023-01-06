@@ -3,7 +3,7 @@ from . import derivative as d
 import subprocess
 
 
-def component_str(c_name, inputs, outputs, comp_f, black=True):
+def component_str(c_name, inputs, outputs, comp_f, black=False):
     """
     :param c_name: component name
     :param inputs: list of input variables "renamed"
@@ -45,7 +45,7 @@ def component_str(c_name, inputs, outputs, comp_f, black=True):
     return s
 
 
-def component_str_derivative(c_name, inputs, outputs, const, comp_f, pack, black=True):
+def component_str_derivative(c_name, inputs, outputs, const, comp_f, pack, black=False):
     """
     :param c_name: component name
     :param inputs: list of input variables "renamed"

@@ -133,7 +133,7 @@ def aggregate_result(hg_data):
         return result
 
 
-def gen_string(result, pack, d_check, imports=False, black=True):
+def gen_string(result, pack, d_check, imports=False, black=False):
     """
     :param imports: boolean to specify if imports are required
     :param pack: list of packages that the user wants to import (instances of the Pack class)
@@ -193,7 +193,7 @@ def gen_string(result, pack, d_check, imports=False, black=True):
     return [s, ls]
 
 
-def rec_gen_string(hg_data, pack, d_check, black=True):
+def rec_gen_string(hg_data, pack, d_check, black=False):
     """
     :param hg_data: higher group data to generate a string from
     :param pack: list of packages that the user wants to import
