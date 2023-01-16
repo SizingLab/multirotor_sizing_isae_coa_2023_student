@@ -253,7 +253,7 @@ class BATTERY(om.ExplicitComponent):
         self.add_output("data:battery:capacity", units="A*s")
         self.add_output("data:battery:current:max", units="A")
         self.add_output("data:battery:power:max", units="W")
-        self.add_output("data:battery:power:hover", units="A")
+        self.add_output("data:battery:power:hover", units="W")
 
     def setup_partials(self):
         self.declare_partials("*", "*", method="fd")
@@ -397,7 +397,7 @@ class FRAME(om.ExplicitComponent):
 class OBJECTIVES(om.ExplicitComponent):
     def setup(self):
         self.add_input("data:battery:capacity", val=np.nan, units="A*s")
-        self.add_input("data:battery:power:hover", val=np.nan, units="A")
+        self.add_input("data:battery:power:hover", val=np.nan, units="W")
         self.add_input("data:ESC:mass", val=np.nan, units="kg")
         self.add_input("data:propeller:mass", val=np.nan, units="kg")
         self.add_input("data:motor:mass", val=np.nan, units="kg")
