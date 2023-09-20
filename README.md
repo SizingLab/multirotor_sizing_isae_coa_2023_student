@@ -1,4 +1,4 @@
-﻿[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AeroMAPS/AeroMAPS/HEAD)
+﻿[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/SizingLab/multirotor_sizing_isae_coa_2023_student_version/HEAD)
 
 # Sizing of multi-rotor drones
 
