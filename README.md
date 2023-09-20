@@ -1,4 +1,6 @@
-﻿# Sizing of multi-rotor drones
+﻿[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AeroMAPS/AeroMAPS/HEAD)
+
+# Sizing of multi-rotor drones
 
 *This set of documents aims to provide an introduction on the use of Python and Jupyter notebooks for the sizing of multi-rotor drones.*
 
